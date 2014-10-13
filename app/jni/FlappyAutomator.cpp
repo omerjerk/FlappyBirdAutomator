@@ -61,7 +61,17 @@ class ContentFinder {
         }
 };
 
-JNIEXPORT int JNICALL
-Java_in_omerjerk_flappybirdautomator_someFunction(JNIEnv * env, jobject  obj) {
-    return 0;
+JNIEXPORT jlong JNICALL
+Java_in_omerjerk_flappybirdautomator_nativeCreateObject
+(JNIEnv * env, jobject  obj) {
+    jlong result = (jlong) new ContentFinder();
+    return result;
+}
+
+JNIEXPORT void JNICALL
+Java_in_omerjerk_flappybirdautomator_nativeDestroyObject
+(JNIEnv * env, jobject  obj, jlong thiz) {
+    if (thiz != 0) {
+        delete (ContentFinder*) thiz;
+    }
 }
